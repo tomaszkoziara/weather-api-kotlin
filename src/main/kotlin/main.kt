@@ -12,8 +12,8 @@ import io.ktor.response.respondText
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import org.koin.ktor.ext.installKoin
-import ping.pingModule
-import temperature.temperaturesModule
+import routing.pingModule
+import routing.temperaturesModule
 
 fun main(args: Array<String>) {
 

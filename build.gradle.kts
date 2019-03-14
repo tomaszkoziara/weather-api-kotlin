@@ -1,13 +1,15 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val kotlinVersion = "1.3.20"
 val koinVersion = "1.0.2"
 val ktorVersion = "1.1.3"
+val fuelVersion = "2.0.1"
 
 plugins {
     java
     idea
     application
-    kotlin("jvm") version "1.3.11"
+    kotlin("jvm") version "1.3.20"
 }
 
 group = "com.tomasz"
@@ -16,10 +18,12 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
     jcenter()
+    maven(url = "https://kotlin.bintray.com/kotlinx")
 }
 
 dependencies {
-    compile("org.jetbrains.kotlin:kotlin-reflect:1.3.10")
+    compile("org.jetbrains.kotlin:kotlin-reflect:1.3.20")
+    compile("org.jetbrains.kotlin:kotlin-serialization:1.3.20")
     compile(kotlin("stdlib-jdk8"))
     // Koin for Kotlin apps
     compile("org.koin:koin-core:$koinVersion")
@@ -33,6 +37,11 @@ dependencies {
     testCompile("org.koin:koin-test:1.0.2")
     // Joda Time
     compile("joda-time:joda-time:2.10.1")
+    // Fuel
+    compile("com.github.kittinunf.fuel:fuel:$fuelVersion")
+    compile("com.github.kittinunf.fuel:fuel-coroutines:$fuelVersion")
+
+    compile("com.google.code.gson:gson:2.8.5")
 
 }
 

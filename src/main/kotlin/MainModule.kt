@@ -1,9 +1,20 @@
 import org.koin.dsl.module.module
-import temperature.ITemperatureController
-import temperature.TemperatureController
+import service.TemperatureAPI
+import controller.ITemperatureController
+import controller.TemperatureController
+import service.ITemperatureAPI
+import service.IWeatherService
+import service.WeatherService
 
 val mainModule = module(createOnStart = true) {
 
-    single { TemperatureController() as ITemperatureController }
+    // APIs
+    single { TemperatureAPI("http://localhost:8000") as ITemperatureAPI }
+
+    // Controllers
+    single { TemperatureController(get()) as ITemperatureController }
+
+    // Services
+    single { WeatherService(get()) as IWeatherService }
 
 }

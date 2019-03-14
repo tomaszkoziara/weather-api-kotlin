@@ -1,8 +1,12 @@
-package temperature
+package controller
 
+import com.google.gson.Gson
+import data.Temperature
 import io.ktor.application.ApplicationCall
 import io.ktor.request.ApplicationRequest
 import io.ktor.response.respondText
+import org.joda.time.DateTime
+import service.IWeatherService
 
 interface ITemperatureController {
 
@@ -10,7 +14,7 @@ interface ITemperatureController {
 
 }
 
-class TemperatureController: ITemperatureController {
+class TemperatureController(val weatherService: IWeatherService): ITemperatureController {
 
     override suspend fun getTemperatures(call: ApplicationCall,
                                          checkParametersFunction: (request: ApplicationRequest) -> Unit) {
@@ -20,7 +24,11 @@ class TemperatureController: ITemperatureController {
         val start = call.request.queryParameters["start"]
         val end = call.request.queryParameters["end"]
 
-        call.respondText("Starting from ${start} to ${end}")
+        val startDateTime = DateTime(start)
+        val endDateTime = DateTime(end)
+
+        val temperatures: List<Temperature> = weatherService.fetchTemperatures(startDateTime.toDate(), endDateTime.toDate())
+        call.respondText(Gson().toJson(temperatures))
 
     }
 

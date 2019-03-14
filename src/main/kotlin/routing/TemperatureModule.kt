@@ -1,6 +1,7 @@
-package temperature
+package routing
 
 import common.startEndParameterCheckFun
+import controller.ITemperatureController
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.routing.get

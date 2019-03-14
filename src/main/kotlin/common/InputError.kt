@@ -1,3 +1,3 @@
 package common
 
-class InputError(override val message: String): Error()
+class InputError(override val message: String): Throwable()

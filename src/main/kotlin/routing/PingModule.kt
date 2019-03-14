@@ -1,4 +1,4 @@
-package ping
+package routing
 
 import io.ktor.application.Application
 import io.ktor.application.call
