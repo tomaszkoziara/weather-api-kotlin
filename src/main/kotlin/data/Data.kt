@@ -1,3 +1,5 @@
 package data
 
-data class Temperature(val temp: String, val date: String)
+import java.util.*
+
+data class Temperature(val temp: Double, val date: Date)

@@ -34,19 +34,26 @@ dependencies {
     // Logging provider
     compile("org.slf4j:slf4j-log4j12:1.7.25")
     // Testing
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.0")
     testCompile("org.koin:koin-test:1.0.2")
+    testCompile("io.mockk:mockk:1.9.1")
     // Joda Time
     compile("joda-time:joda-time:2.10.1")
     // Fuel
     compile("com.github.kittinunf.fuel:fuel:$fuelVersion")
     compile("com.github.kittinunf.fuel:fuel-coroutines:$fuelVersion")
-
+    // Gson
     compile("com.google.code.gson:gson:2.8.5")
 
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+tasks.getByName<Test>("test") {
+    maxHeapSize="256m"
+    useJUnitPlatform()
 }
 
 application {

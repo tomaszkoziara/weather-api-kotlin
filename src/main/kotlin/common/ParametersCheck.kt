@@ -1,12 +1,12 @@
 package common
 
-import io.ktor.request.ApplicationRequest
+import routing.ApplicationCallWrapper
 import java.time.format.DateTimeFormatter
 
-val startEndParameterCheckFun: (request: ApplicationRequest) -> Unit = {
+val startEndParameterCheckFun: (applicationCall: ApplicationCallWrapper) -> Unit = {
 
-    val start = it.queryParameters["start"]
-    val end = it.queryParameters["end"]
+    val start = it.queryParameter("start")
+    val end = it.queryParameter("end")
 
     checkIfExists("start", start)
     checkIfExists("end", end)

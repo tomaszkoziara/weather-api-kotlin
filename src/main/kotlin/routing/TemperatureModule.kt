@@ -1,7 +1,7 @@
 package routing
 
 import common.startEndParameterCheckFun
-import controller.ITemperatureController
+import controller.IWeatherController
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.routing.get
@@ -10,11 +10,12 @@ import org.koin.ktor.ext.inject
 
 fun Application.temperaturesModule() {
 
-    val temperatureController by inject<ITemperatureController>()
+    val temperatureController by inject<IWeatherController>()
 
     routing {
         get("/temperatures") {
-            temperatureController.getTemperatures(call, checkParametersFunction = startEndParameterCheckFun)
+            temperatureController.getTemperatures(ApplicationCallWrapper(call),
+                checkParametersFunction = startEndParameterCheckFun)
         }
     }
 
