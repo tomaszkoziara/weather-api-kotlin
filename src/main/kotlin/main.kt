@@ -13,7 +13,7 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import org.koin.ktor.ext.installKoin
 import routing.pingModule
-import routing.temperaturesModule
+import routing.weatherModule
 
 fun main(args: Array<String>) {
 
@@ -42,6 +42,6 @@ fun Application.main() {
     }
 
     pingModule()
-    temperaturesModule()
+    weatherModule()
 
 }
