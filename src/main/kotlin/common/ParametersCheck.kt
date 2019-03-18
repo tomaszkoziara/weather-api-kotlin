@@ -10,8 +10,8 @@ val startEndParameterCheckFun: (applicationCall: ApplicationCallWrapper) -> Unit
 
     checkIfExists("start", start)
     checkIfExists("end", end)
-    checkIfValidISO8610("start", start)
-    checkIfValidISO8610("end", end)
+    checkIfValidISO8601("start", start)
+    checkIfValidISO8601("end", end)
 
 }
 
@@ -21,7 +21,7 @@ private fun checkIfExists(parameterName: String, parameterValue: String?) {
     }
 }
 
-private fun checkIfValidISO8610(parameterName: String, parameterValue: String?) {
+private fun checkIfValidISO8601(parameterName: String, parameterValue: String?) {
     try {
         DateTimeFormatter.ISO_DATE_TIME.parse(parameterValue)
     } catch (e: Throwable) {
