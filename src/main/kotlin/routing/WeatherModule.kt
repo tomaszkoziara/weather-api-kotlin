@@ -28,6 +28,13 @@ fun Application.weatherModule() {
             )
         }
 
+        get("/weather") {
+            weatherController.getWeather(
+                ApplicationCallWrapper(call),
+                checkParametersFunction = startEndParameterCheckFun
+            )
+        }
+
     }
 
 }

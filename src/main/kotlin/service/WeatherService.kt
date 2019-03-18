@@ -36,7 +36,32 @@ class WeatherService(val temperatureAPI: ITemperatureAPI,
     }
 
     override fun fetchWeather(start: Date, end: Date): List<Weather> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        val weatherList = arrayListOf<Weather>()
+
+        runBlocking {
+
+            val temperaturesAsync = async { fetchTemperatures(start, end) }
+            val windspeedsAsync = async { fetchWindspeeds(start, end) }
+
+            val temperatures = temperaturesAsync.await()
+            val windspeeds = windspeedsAsync.await()
+
+            for (i in 0 until temperatures.size) {
+                weatherList.add(buildWeather(temperatures[i], windspeeds[i]))
+            }
+        }
+
+        return weatherList
+    }
+
+    private fun buildWeather(temperature: Temperature, windspeed: Windspeed): Weather {
+        return Weather(
+            temp = temperature.temp,
+            date = temperature.date,
+            north = windspeed.north,
+            west = windspeed.west
+        )
     }
 
     private fun <T> doParallelCalls(start: Date, end: Date, call: suspend (d: Date) -> T): List<T> {
