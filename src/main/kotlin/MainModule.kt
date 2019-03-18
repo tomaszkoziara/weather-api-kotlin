@@ -1,6 +1,6 @@
-import org.koin.dsl.module.module
 import controller.IWeatherController
 import controller.WeatherController
+import org.koin.dsl.module.module
 import service.*
 
 val mainModule = module(createOnStart = true) {
