@@ -18,9 +18,11 @@ class APICallAdapter: AbstractAPI() {
 
         val url = "$endpoint?at=${isoDateFormat.format(atDate)}"
 
+        println("Calling url $url")
         val (resultString, error) = this.getCall(url)
 
         if (error != null) {
+            println(error)
             throw APIError("Error fetching data!")
         }
 

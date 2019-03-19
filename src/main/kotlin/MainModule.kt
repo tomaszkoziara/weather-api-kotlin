@@ -5,9 +5,12 @@ import service.*
 
 val mainModule = module(createOnStart = true) {
 
+    val temperatureAPIEndpoint: String = System.getenv("temperatureAPIEndpoint") ?: "http://localhost:8000"
+    val windspeedAPIEndpoint: String = System.getenv("windspeedAPIEndpoint") ?: "http://localhost:8080"
+
     // APIs
-    single { TemperatureAPI("http://localhost:8000") as ITemperatureAPI }
-    single { WindspeedAPI("http://localhost:8080") as IWindspeedAPI }
+    single { TemperatureAPI(temperatureAPIEndpoint) as ITemperatureAPI }
+    single { WindspeedAPI(windspeedAPIEndpoint) as IWindspeedAPI }
 
     // Controllers
     single { WeatherController(get()) as IWeatherController }
